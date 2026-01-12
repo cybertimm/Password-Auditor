@@ -5,6 +5,7 @@ from patterns import has_common_patterns
 from reuse import detect_reuse
 from breach import check_breach
 
+
 def main():
     print("Password Security Analyzer\n")
 
@@ -14,7 +15,7 @@ def main():
     passwords = [pw1, pw2]
 
     entropy = calculate_entropy(pw1)
-    patterns = has_common_patterns(pw1)
+    patterns_found = has_common_patterns(pw1)
     reused = detect_reuse(passwords)
     breached = check_breach(pw1)
 
@@ -30,18 +31,17 @@ def main():
     else:
         print("✅ Strong entropy")
 
-    if patterns:
+    if patterns_found:
         print("❌ Common or predictable pattern detected")
 
     if reused:
         print("❌ Password reuse detected")
 
-   if breached:
-    print("⚠️ Found in known data breaches")
-else:
-    print("✅ No breach matches found (or check unavailable)")
+    if breached:
+        print("⚠️ Found in known data breaches")
+    else:
+        print("✅ No breach matches found (or check unavailable)")
 
 
 if __name__ == "__main__":
     main()
-
