@@ -36,10 +36,12 @@ def main():
     if reused:
         print("❌ Password reuse detected")
 
-    if breached:
-        print("⚠️ Found in known data breaches")
-    else:
-        print("✅ Not found in breach databases")
+   if breached:
+    print("⚠️ Found in known data breaches")
+else:
+    print("✅ No breach matches found (or check unavailable)")
+
 
 if __name__ == "__main__":
     main()
+
