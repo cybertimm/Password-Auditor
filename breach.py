@@ -7,9 +7,13 @@ def check_breach(password):
     suffix = sha1[5:]
 
     url = f"https://api.pwnedpasswords.com/range/{prefix}"
-    response = requests.get(url)
 
-    if response.status_code != 200:
+    try:
+        response = requests.get(url, timeout=5)
+        response.raise_for_status()
+    except requests.RequestException:
+        # Fail safely: assume not breached if API is unreachable
         return False
 
-    return suffix in response.text
+    hashes = (line.split(":")[0] for line in response.text.splitlines())
+    return suffix in hashes
